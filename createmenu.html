@@ -67,132 +67,135 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-4">
-                        <!--Menu-->
-                        <h1 class="page-header">Menu</h1> 
+                    <!--Menu-->
+                    <div>
+                        <h1 class="page-header">Create Menu</h1> 
 
                         <!--Main Items-->
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Main Items</h3>
-                            </div>
-                            <div class="panel-body">
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Item</th>
-                                            <th>Price</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody data-bind="foreach: mainItems">
-                                        <tr>
-                                            <td data-bind="text: name"></td>
-                                            <td data-bind="text: priceFormatted"></td>
-                                            <td>
-                                                <span data-bind="click: $parent.removeMain"><i class="fa fa-remove text-danger"></i></span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <button class="btn btn-default" data-toggle="modal" data-target="#modal" data-bind="click: showMainModal">Add Item</button>
+                        <div class="col-md-4">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Main Items</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Item</th>
+                                                <th>Price</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach: mainItems">
+                                            <tr>
+                                                <td data-bind="text: name"></td>
+                                                <td data-bind="text: priceFormatted"></td>
+                                                <td>
+                                                    <span data-bind="click: $parent.removeMain"><i class="fa fa-remove text-danger"></i></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <button class="btn btn-default" data-toggle="modal" data-target="#modal" data-bind="click: showMainModal">Add Item</button>
+                                </div>
                             </div>
                         </div>
                         <!--/Main Items-->
 
                         <!--Side Items-->
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Side Items</h3>
-                            </div>
-                            <div class="panel-body">
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Item</th>
-                                            <th>Price</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody data-bind="foreach: sideItems">
-                                        <tr>
-                                            <td data-bind="text: name"></td>
-                                            <td data-bind="text: priceFormatted"></td>
-                                            <td>
-                                                <span data-bind="click: $parent.removeSide"><i class="fa fa-remove text-danger"></i></span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <button class="btn btn-default" data-toggle="modal" data-target="#modal" data-bind="click: showSideModal">Add Item</button>
+                        <div class="col-md-4">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Side Items</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Item</th>
+                                                <th>Price</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach: sideItems">
+                                            <tr>
+                                                <td data-bind="text: name"></td>
+                                                <td data-bind="text: priceFormatted"></td>
+                                                <td>
+                                                    <span data-bind="click: $parent.removeSide"><i class="fa fa-remove text-danger"></i></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <button class="btn btn-default" data-toggle="modal" data-target="#modal" data-bind="click: showSideModal">Add Item</button>
+                                </div>
                             </div>
                         </div>
                         <!--/Side Items-->
 
                         <!--Beverages-->
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Beverages</h3>
-                            </div>
-                            <div class="panel-body">
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Item</th>
-                                            <th>Price</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody data-bind="foreach: bevItems">
-                                        <tr>
-                                            <td data-bind="text: name"></td>
-                                            <td data-bind="text: priceFormatted"></td>
-                                            <td>
-                                                <span data-bind="click: $parent.removeBev"><i class="fa fa-remove text-danger"></i></span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <button class="btn btn-default" data-toggle="modal" data-target="#modal" data-bind="click: showBevModal">Add Item</button>
+                        <div class="col-md-4">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Beverages</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Item</th>
+                                                <th>Price</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach: bevItems">
+                                            <tr>
+                                                <td data-bind="text: name"></td>
+                                                <td data-bind="text: priceFormatted"></td>
+                                                <td>
+                                                    <span data-bind="click: $parent.removeBev"><i class="fa fa-remove text-danger"></i></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <button class="btn btn-default" data-toggle="modal" data-target="#modal" data-bind="click: showBevModal">Add Item</button>
+                                </div>
                             </div>
                         </div>
                         <!--/Beverages-->
 
                     </div>
                     <!--/Menu-->
-                    <!--Register-->
-                    <div class="col-md-4">
-                        <h1 class="page-header">Register</h1> 
-
-                        <!--Items-->
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Items</h3>
-                            </div>
-                            <div class="panel-body">Item</div>
-                        </div>
-                        <!--/Items-->
-
-                        <!--Buttons-->
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Items</h3>
-                            </div>
-                            <div class="panel-body">Item</div>
-                        </div>
-                        <!--/Buttons-->
-
-                    </div>
-                    <!--/Register-->
                 </div>
                 <!-- /.row -->
-            </div>
-            <!-- /.container-fluid -->
-        </div>
-        <!-- /#page-wrapper -->
 
+                <!--Save Menu-->
+                <div class="well">
+
+                    <div class="row">
+                        <div class="form-group col-md-3" id="menu-name">
+                            <!--<label class="control-label" for="menu-name">Menu Name</label>-->
+                            <input class="form-control" type="text" placeholder="Input Menu Name" data-bind="value: menuName">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <input type="button" value="Save Menu" class="btn btn-primary btn-block-custom" data-bind="click: saveMenu, enable: menuName" />
+                            <input type="button" value="Cancel" class="btn btn-primary btn-block-custom" data-bind="click: cancel" />
+                            <input type="button" value="Clear" class="btn btn-primary btn-block-custom" />
+                        </div>
+                    </div>
+
+                </div>
+                <!--/Save Menu-->
+
+                <!-- /.container-fluid -->
+            </div>
+            <!-- /#page-wrapper -->
+
+        </div>
+        <!-- /#wrapper -->
     </div>
-    <!-- /#wrapper -->
 
     <!--Modal-->
     <div id="modal" class="modal">
@@ -241,7 +244,8 @@
             new menuItem('Hamburger', 3.00),
             new menuItem('Hot Dog', 2.50),
             new menuItem('Gyro', 5.25),
-            new menuItem('Burrito', 4.00)
+            new menuItem('Burrito', 4.00),
+            new menuItem('Salad', 2.00)
         ];
 
         var sideMenu = [
@@ -264,6 +268,7 @@
         var viewModel = function () {
             //Model / Page Variables
             var self = this;
+            self.menuName = ko.observable();
             self.modalTitle = ko.observable();
             self.modalMenuCurrent = ko.observable();
             self.modalCurrentName = ko.observable();
@@ -321,11 +326,16 @@
                     self.modalCurrentPrice('');
                 }
             };
+
+            self.saveMenu = function () {
+                //sessionStorage.setItem("menu-name", self.menuName());
+            };
+
+            self.cancel = function () {};
         };
          //Render Model
         ko.applyBindings(new viewModel());
     </script>
-
 </body>
 
 </html>
