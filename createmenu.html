@@ -48,13 +48,13 @@
                             <a href="createmenu.html"><i class="fa fa-tag fa-fw"></i> Create New Menu</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-coffee fa-fw"></i> Launch Saved Menu</a> 
+                            <a href="launchmenu.html"><i class="fa fa-coffee fa-fw"></i> Launch Saved Menu</a> 
                         </li>
                         <li>
                             <a href="tables.html"><i class="fa fa-bar-chart fa-fw"></i> Get Sales Total</a>
                         </li>
                         <li>
-                            <a href="forms.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            <a href="/"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -239,31 +239,6 @@
             return this;
         };
 
-         //Menu Data
-        var mainMenu = [
-            new menuItem('Hamburger', 3.00),
-            new menuItem('Hot Dog', 2.50),
-            new menuItem('Gyro', 5.25),
-            new menuItem('Burrito', 4.00),
-            new menuItem('Salad', 2.00)
-        ];
-
-        var sideMenu = [
-            new menuItem('Chili', 2.00),
-            new menuItem('Fries', 1.50),
-            new menuItem('Chips', 0.75),
-            new menuItem('Egg Roll', 1.75),
-            new menuItem('Onion Rings', 2.25)
-        ];
-
-        var beverageMenu = [
-            new menuItem('Pepsi', 1.00),
-            new menuItem('Sprite', 1.00),
-            new menuItem('Diet', 1.00),
-            new menuItem('Mt. Dew', 1.00),
-            new menuItem('Water', 1.00),
-        ];
-
          //Page View Model
         var viewModel = function () {
             //Model / Page Variables
@@ -273,9 +248,9 @@
             self.modalMenuCurrent = ko.observable();
             self.modalCurrentName = ko.observable();
             self.modalCurrentPrice = ko.observable();
-            self.mainItems = ko.observableArray(mainMenu);
-            self.sideItems = ko.observableArray(sideMenu);
-            self.bevItems = ko.observableArray(beverageMenu);
+            self.mainItems = ko.observableArray();
+            self.sideItems = ko.observableArray();
+            self.bevItems = ko.observableArray();
 
             //Show Modal Functions
             self.showMainModal = function () {
@@ -327,11 +302,26 @@
                 }
             };
 
-            self.saveMenu = function () {
-                //sessionStorage.setItem("menu-name", self.menuName());
+            self.cancel = function () {
+                window.location = '/launchmenu.html';
             };
-
-            self.cancel = function () {};
+            
+            self.saveMenu = function () {
+                var menuList = [];
+                var menus = sessionStorage.getItem('menus');
+                var menu = {
+                    menuName: self.menuName(),
+                    mainMenu: self.mainItems(),
+                    sideMenu: self.sideItems(),
+                    beverageMenu: self.bevItems(),
+                };
+                if (menus) {
+                    menuList = JSON.parse(menus);
+                }
+                menuList.push(menu);
+                sessionStorage.setItem('menus', JSON.stringify(menuList));
+                window.location = '/launchmenu.html';
+            };
         };
          //Render Model
         ko.applyBindings(new viewModel());

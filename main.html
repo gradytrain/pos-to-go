@@ -67,16 +67,17 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div>
                         <h1 class="page-header">Main</h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
-                <!-- /.row -->
             </div>
-            <!-- /.container-fluid -->
+            <!-- /.row -->
         </div>
-        <!-- /#page-wrapper -->
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
 
     </div>
     <!-- /#wrapper -->
@@ -85,6 +86,23 @@
     <script src="js/jquery.js"></script>
     <!-- Bootstrap JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+    <!--Knockout JS http://knockoutjs.com/-->
+    <script type='text/javascript' src='js/knockout-3.2.0.js'></script>
+
+    <script type="text/javascript">
+        var viewModel = function () {
+            var self = this;
+            self.menus = ko.observableArray();
+
+            var menus = sessionStorage.getItem('menus');
+            console.log(menus);
+            if (menus) {
+                self.menus(JSON.parse(menus));
+            }
+        };
+         //Render Model
+        ko.applyBindings(new viewModel());
+    </script>
 
 </body>
 

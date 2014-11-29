@@ -36,7 +36,7 @@
                         <div class="form-group">
                             <label for="f-name" class="col-md-3 control-label">First Name</label>
                             <div class="col-md-7">
-                                <input type="text" class="form-control" id="f-name" placeholder="First Name">
+                                <input type="text" class="form-control" id="f-name" data-bind="value: firstName" placeholder="First Name">
                             </div>
                         </div>
                         <!--===========================-->
@@ -44,39 +44,40 @@
                         <div class="form-group">
                             <label for="l-name" class="col-md-3 control-label">Last Name</label>
                             <div class="col-md-7">
-                                <input type="text" class="form-control" id="l-name" placeholder="Last Name">
+                                <input type="text" class="form-control" id="l-name" data-bind="value: lastName" placeholder="Last Name">
                             </div>
                         </div>
                         <!--Email-->
                         <!--===========================-->
-                        <div class="form-group">
+                        <div class="form-group" data-bind="css: { 'has-error': !email() && registerClicked }">
                             <label for="email-address" class="col-md-3 control-label">Email</label>
                             <div class="col-md-7">
-                                <input type="text" class="form-control" id="email-address" placeholder="Email">
+                                <input type="text" class="form-control" id="email-address" data-bind="value: email" placeholder="Email">
                             </div>
                         </div>
                         <!--Password-->
                         <!--===========================-->
-                        <div class="form-group">
+                        <div class="form-group" data-bind="css: { 'has-error': !password() && registerClicked }">
                             <label for="inputPassword" class="col-md-3 control-label">Password</label>
                             <div class="col-md-7">
-                                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                                <input type="password" class="form-control" id="password" data-bind="value: password" placeholder="Password">
                             </div>
                         </div>
                         <!--Confirm Password-->
                         <!--===========================-->
-                        <div class="form-group">
+                        <div class="form-group" data-bind="css: { 'has-error': !passwordCheck() && registerClicked }">
                             <label for="inputPassword" class="col-md-3 control-label">Password Again</label>
                             <div class="col-md-7">
-                                <input type="password" class="form-control" id="inputPassword" placeholder="Confirm Password">
+                                <input type="password" class="form-control" id="password-check" data-bind="value: passwordCheck" placeholder="Confirm Password">
                             </div>
                         </div>
+                        <div class="alert alert-danger" data-bind="text: showError, visible: showError()"></div>
                         <!--===========================-->
                         <!--Buttons-->
                         <div class="form-group">
                             <div class="col-md-7 col-md-offset-3">
-                                <button type="submit" class="btn btn-primary">Register</button>
-                                <button class="btn btn-default">Cancel</button>
+                                <input class="btn btn-primary btn-block-custom" value="Register" data-bind="click: saveRegistration" />
+                                <button class="btn btn-default btn-block-custom" data-bind="click: cancel">Cancel</button>
                             </div>
                         </div>
                     </fieldset>
@@ -89,6 +90,109 @@
     <script src="js/jquery.js"></script>
     <!-- Bootstrap JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+    <!--Knockout JS http://knockoutjs.com/-->
+    <script type='text/javascript' src='js/knockout-3.2.0.js'></script>
+
+    <script type="text/javascript">
+        //Starter menu functions.
+        var menu = function (menuName) {
+            var self = this;
+            self.menuName = menuName;
+            self.mainMenu = [];
+            self.sideMenu = [];
+            self.beverageMenu = [];
+            return self;
+        };
+        var menuItem = function (name, price) {
+            var self = this;
+            self.name = name;
+            self.price = price;
+            self.priceFormatted = '$' + price.toFixed(2);
+            return self;
+        };
+        var starterMenus = function () {
+            var menuList = [];
+            var menu1 = new menu('American');
+            menu1.mainMenu.push(new menuItem('Hamburger', 2.25));
+            menu1.mainMenu.push(new menuItem('Cheeseburger', 2.75));
+            menu1.mainMenu.push(new menuItem('Hot Dog', 2.00));
+            menu1.mainMenu.push(new menuItem('Chilli Dog', 3.00));
+            menu1.mainMenu.push(new menuItem('Grilled Cheese', 3.25));
+
+            menu1.sideMenu.push(new menuItem('French Fries', 1.75));
+            menu1.sideMenu.push(new menuItem('Soup', 2.25));
+            menu1.sideMenu.push(new menuItem('Cheese Sticks', 3.00));
+            menu1.sideMenu.push(new menuItem('Nachos', 3.00));
+            menu1.sideMenu.push(new menuItem('Onion Rings', 4.00));
+
+            menu1.beverageMenu.push(new menuItem('Pepsi', 1.50));
+            menu1.beverageMenu.push(new menuItem('Mt. Dew', 1.50));
+            menu1.beverageMenu.push(new menuItem('Orange', 1.50));
+            menu1.beverageMenu.push(new menuItem('Sprite', 1.50));
+            menu1.beverageMenu.push(new menuItem('Water', 1.50));
+
+            var menu2 = new menu('Mexican');
+            menu2.mainMenu.push(new menuItem('Burrito', 2.25));
+            menu2.mainMenu.push(new menuItem('Quesadilla', 2.75));
+            menu2.mainMenu.push(new menuItem('Tacos', 2.00));
+            menu2.mainMenu.push(new menuItem('Fajitas', 3.00));
+            menu2.mainMenu.push(new menuItem('Tampiquena', 3.25));
+
+            menu2.sideMenu.push(new menuItem('Churros', 1.75));
+            menu2.sideMenu.push(new menuItem('Guacamole', 2.25));
+            menu2.sideMenu.push(new menuItem('Fiesta Dip', 3.00));
+            menu2.sideMenu.push(new menuItem('Panchitos', 3.00));
+            menu2.sideMenu.push(new menuItem('Chili con Queso', 4.00));
+
+            menu2.beverageMenu.push(new menuItem('Pepsi', 1.50));
+            menu2.beverageMenu.push(new menuItem('Mt. Dew', 1.50));
+            menu2.beverageMenu.push(new menuItem('Orange', 1.50));
+            menu2.beverageMenu.push(new menuItem('Sprite', 1.50));
+            menu2.beverageMenu.push(new menuItem('Water', 1.50));
+
+            menuList.push(menu1);
+            menuList.push(menu2);
+            return menuList;
+        };
+         //Viewmodel
+        var viewModel = function () {
+            var self = this;
+            self.firstName = ko.observable();
+            self.lastName = ko.observable();
+            self.email = ko.observable();
+            self.password = ko.observable();
+            self.passwordCheck = ko.observable();
+            self.showError = ko.observable();
+            self.registerClicked = ko.observable(false);
+            self.saveRegistration = function () {
+                console.log('hello-before');
+                //Don't show errors until at least one click.
+                self.registerClicked(true);
+                //Validate a password and a name were entered.
+                if (self.password() !== self.passwordCheck()) {
+                    self.showError('Passwords do not match');
+                    return;
+                } else {
+                    self.showError('');
+                }
+                //Save registration info.
+                if (self.email() && self.password()) {
+                    sessionStorage.setItem('first-name', self.firstName());
+                    sessionStorage.setItem('last-name', self.lastName());
+                    sessionStorage.setItem('email', self.email());
+                    sessionStorage.setItem('password', self.password());
+                    sessionStorage.setItem('menus', JSON.stringify(new starterMenus()));
+                    console.log(sessionStorage.getItem('menus'));
+                    window.location = '/';
+                }
+            };
+            self.cancel = function () {
+                window.location = '/';
+            };
+        };
+         //Render Model
+        ko.applyBindings(new viewModel());
+    </script>
 
 </body>
 
