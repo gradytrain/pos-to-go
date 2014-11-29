@@ -41,6 +41,9 @@ body {
     input[type="password"] {
         font-size: 16px;
     }
+    input[type="number"] {
+        font-size: 16px;
+    }
 }
 .login-panel {
     margin-top: 25%;
