@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>POS to GO - Main Menu</title>
+    <title>POS to GO - Complete Order</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -35,12 +35,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">POS to GO</a>
+                <a class="navbar-brand" href="main.html">POS to GO</a>
             </div>
             <!-- /.navbar-header -->
 
-            <!-- /.navbar-top-links -->
-
+            <!--Sidebar-->
             <div class="navbar-default sidebar" role="navigation">
                 <div class="collapse sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
@@ -58,10 +57,10 @@
                         </li>
                     </ul>
                 </div>
-                <!-- /.sidebar-collapse -->
             </div>
-            <!-- /.navbar-static-side -->
+            <!-- /sidebar -->
         </nav>
+        <!--/nav-->
 
         <!-- Page Content -->
         <div id="page-wrapper">
@@ -85,7 +84,8 @@
                                         </div>
                                         <input type="text" class="form-control" placeholder="email address" data-bind="enable: sendEmailChecked">
                                     </div>
-                                    <button type="button" class="btn btn-success" data-bind="click: completeOrder"> <i></i> Complete Order</button>
+                                    <button type="button" class="btn btn-success btn-block-custom" data-bind="click: completeOrder"> <i></i> Complete Order</button>
+                                    <button type="button" class="btn btn-primary btn-block-custom" data-bind="click: anotherOrder, visible: showAnotherButton"> <i></i> Another Order?</button>
                                 </div>
                             </div>
                         </div>
@@ -118,7 +118,12 @@
                 $(event.target).children('i').addClass('fa fa-spinner fa-spin');
                 setTimeout(function () {
                     $(event.target).html('Order Completed!').removeClass('btn-warning');
+                    self.showAnotherButton(true);
                 }, 3000);
+            };
+            self.showAnotherButton = ko.observable(false);
+            self.anotherOrder = function () {
+                window.location = 'menu.html';
             };
         };
          //Render Model
