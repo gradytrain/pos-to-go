@@ -30,6 +30,9 @@ body {
     }
 }
 @media(max-width: 400px) {
+    .btn: hover {
+        background-color: inherit;
+    }
     .btn-block-custom {
         display: block;
         width: 100%;
