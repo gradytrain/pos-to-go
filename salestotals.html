@@ -69,61 +69,67 @@
                 <div class="row">
                     <!--Menu-->
                     <div class="col-lg-10">
-                        <h1 class="page-header">Total: <span data-bind="text: orderTotal"></span></h1> 
+                        <h1 class="page-header">Sales</h1> 
                         <!--Order Complete Panel-->
                         <div class="col-md-4">
                             <div class="panel panel-primary">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Complete Order</h3>
+                                    <h3 class="panel-title">Sales Totals</h3>
                                 </div>
                                 <div class="panel-body">
                                     <div class="form-group">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" data-bind="checked: sendEmailChecked">Send Email Reciept
-                                            </label>
-                                        </div>
-                                        <input type="text" class="form-control" placeholder="email address" data-bind="enable: sendEmailChecked">
+                                        <label for="select" class="control-label">Select Date</label>
+                                        <select class="form-control" data-bind="foreach: dates">
+                                            <option data-bind="text: date"></option>
+                                        </select>
                                     </div>
-                                    <button type="button" class="btn btn-success" data-bind="click: completeOrder"> <i></i> Complete Order</button>
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            Total Sales: <span class="pull-right" data-bind="text: totalSalesFormatted"></span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            Total Orders: <span class="pull-right" data-bind="text: totalOrders"></span>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
+                            <!--/Order Complete Panel-->
                         </div>
-                        <!--/Order Complete Panel-->
                     </div>
                 </div>
+                <!-- /.row -->
+                <!-- /.container-fluid -->
             </div>
-            <!-- /.row -->
-            <!-- /.container-fluid -->
+            <!-- /#page-wrapper -->
         </div>
-        <!-- /#page-wrapper -->
-    </div>
-    <!-- /#wrapper -->
+        <!-- /#wrapper -->
 
-    <!--JQuery JavaScript-->
-    <script src="js/jquery.js"></script>
-    <!-- Bootstrap JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-    <!--Knockout JS http://knockoutjs.com/-->
-    <script type='text/javascript' src='js/knockout-3.2.0.js'></script>
+        <!--JQuery JavaScript-->
+        <script src="js/jquery.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
+        <!--Knockout JS http://knockoutjs.com/-->
+        <script type='text/javascript' src='js/knockout-3.2.0.js'></script>
 
-    <script type="text/javascript">
-        var viewModel = function () {
-            var self = this;
-            self.sendEmailChecked = ko.observable(false);
-            self.orderTotal = sessionStorage.getItem('this-sales-total');
-
-            self.completeOrder = function (self, event) {
-                $(event.target).attr('disabled', true).addClass('btn-warning');
-                $(event.target).children('i').addClass('fa fa-spinner fa-spin');
-                setTimeout(function () {
-                    $(event.target).html('Order Completed!').removeClass('btn-warning');
-                }, 3000);
+        <script type="text/javascript">
+            var sales = sessionStorage.getItem('total-sales');
+            var viewModel = function () {
+                var self = this;
+                self.totalOrders = 0;
+                self.totalSalesFormatted = '$0.00';
+                self.dates = ko.observableArray();
+                self.dates.push({
+                    date: new Date().toDateString()
+                });
+                if (sales) {
+                    var totalSales = JSON.parse(sales);
+                    self.totalOrders = totalSales.orders;
+                    self.totalSalesFormatted = '$' + totalSales.sales.toFixed(2);
+                }
             };
-        };
-         //Render Model
-        ko.applyBindings(new viewModel());
-    </script>
+             //Render Model
+            ko.applyBindings(new viewModel());
+        </script>
 
 </body>
 

@@ -51,7 +51,7 @@
                             <a href="launchmenu.html"><i class="fa fa-coffee fa-fw"></i> Launch Saved Menu</a> 
                         </li>
                         <li>
-                            <a href="tables.html"><i class="fa fa-bar-chart fa-fw"></i> Get Sales Total</a>
+                            <a href="salestotals.html"><i class="fa fa-bar-chart fa-fw"></i> Get Sales Total</a>
                         </li>
                         <li>
                             <a href="/"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -185,7 +185,7 @@
                                     Total: <span class="pull-right" data-bind="text: totalFormat"></span>
                                 </li>
                             </ul>
-                            <input type="button" class="btn btn-success btn-block-custom" value="Complete Order" data-bind="click: completeOrder" />
+                            <input type="button" class="btn btn-success btn-block-custom" value="Place Order" data-bind="click: completeOrder, enable: registerItems().length > '0'" />
                         </div>
                     </div>
                 </div>
@@ -226,15 +226,26 @@
             self.bevItems = ko.observableArray(selectedMenu.beverageMenu);
 
             self.registerItems = ko.observableArray();
+
             self.addToRegister = function (item, event) {
                 self.subTotal(self.subTotal() + item.price);
                 self.tax(self.tax() + (item.price * 0.04));
                 self.registerItems.push(item);
-//                $(event.target).blur();
             };
 
             self.completeOrder = function () {
-                sessionStorage.setItem('order-total', self.totalFormat());
+                var totalsale = {
+                    sales: self.subTotal() + self.tax(),
+                    orders: 1
+                };
+                var orders = sessionStorage.getItem('total-sales');
+                if (orders) {
+                    var sales = JSON.parse(orders);
+                    totalsale.orders += sales.orders;
+                    totalsale.sales += sales.sales;
+                }
+                sessionStorage.setItem('this-sales-total', self.totalFormat());
+                sessionStorage.setItem('total-sales', JSON.stringify(totalsale));
                 window.location = 'completeorder.html';
             };
 
