@@ -95,7 +95,6 @@
             self.menus = ko.observableArray();
 
             var menus = sessionStorage.getItem('menus');
-            console.log(menus);
             if (menus) {
                 self.menus(JSON.parse(menus));
             }

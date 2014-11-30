@@ -182,7 +182,6 @@
                         <div class="form-group col-md-3">
                             <input type="button" value="Save Menu" class="btn btn-primary btn-block-custom" data-bind="click: saveMenu, enable: menuName" />
                             <input type="button" value="Cancel" class="btn btn-primary btn-block-custom" data-bind="click: cancel" />
-                            <input type="button" value="Clear" class="btn btn-primary btn-block-custom" />
                         </div>
                     </div>
 
@@ -305,7 +304,7 @@
             self.cancel = function () {
                 window.location = '/launchmenu.html';
             };
-            
+
             self.saveMenu = function () {
                 var menuList = [];
                 var menus = sessionStorage.getItem('menus');

@@ -165,7 +165,6 @@
             self.showError = ko.observable();
             self.registerClicked = ko.observable(false);
             self.saveRegistration = function () {
-                console.log('hello-before');
                 //Don't show errors until at least one click.
                 self.registerClicked(true);
                 //Validate a password and a name were entered.
@@ -182,7 +181,6 @@
                     sessionStorage.setItem('email', self.email());
                     sessionStorage.setItem('password', self.password());
                     sessionStorage.setItem('menus', JSON.stringify(new starterMenus()));
-                    console.log(sessionStorage.getItem('menus'));
                     window.location = '/';
                 }
             };
