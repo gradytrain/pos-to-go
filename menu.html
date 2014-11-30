@@ -185,7 +185,7 @@
                                     Total: <span class="pull-right" data-bind="text: totalFormat"></span>
                                 </li>
                             </ul>
-                            <input type="button" class="btn btn-success btn-block-custom" value="Complete Order" />
+                            <input type="button" class="btn btn-success btn-block-custom" value="Complete Order" data-bind="click: completeOrder" />
                         </div>
                     </div>
                 </div>
@@ -226,10 +226,15 @@
             self.bevItems = ko.observableArray(selectedMenu.beverageMenu);
 
             self.registerItems = ko.observableArray();
-            self.addToRegister = function (item, element) {
+            self.addToRegister = function (item, event) {
                 self.subTotal(self.subTotal() + item.price);
                 self.tax(self.tax() + (item.price * 0.04));
                 self.registerItems.push(item);
+                $(event.target).blur();
+            };
+            self.completeOrder = function () {
+                sessionStorage.setItem('order-total', self.totalFormat());
+                window.location = 'completeorder.html';
             };
 
             self.subTotal = ko.observable(0);
