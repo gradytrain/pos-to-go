@@ -231,7 +231,9 @@
                 self.tax(self.tax() + (item.price * 0.04));
                 self.registerItems.push(item);
                 $(event.target).blur();
+                event.preventDefault();
             };
+
             self.completeOrder = function () {
                 sessionStorage.setItem('order-total', self.totalFormat());
                 window.location = 'completeorder.html';
