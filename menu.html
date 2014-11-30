@@ -230,8 +230,7 @@
                 self.subTotal(self.subTotal() + item.price);
                 self.tax(self.tax() + (item.price * 0.04));
                 self.registerItems.push(item);
-                $(event.target).blur();
-                event.preventDefault();
+//                $(event.target).blur();
             };
 
             self.completeOrder = function () {
